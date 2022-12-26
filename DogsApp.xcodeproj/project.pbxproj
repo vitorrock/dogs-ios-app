@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9401FDC9295A206A0085C038 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9401FDC8295A206A0085C038 /* MainTabBarController.swift */; };
+		9401FDCB295A221B0085C038 /* DogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9401FDCA295A221B0085C038 /* DogsViewController.swift */; };
 		94B19FE12959C9F000821362 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B19FE02959C9F000821362 /* AppDelegate.swift */; };
 		94B19FE32959C9F000821362 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B19FE22959C9F000821362 /* SceneDelegate.swift */; };
-		94B19FE52959C9F000821362 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B19FE42959C9F000821362 /* ViewController.swift */; };
-		94B19FE82959C9F000821362 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B19FE62959C9F000821362 /* Main.storyboard */; };
 		94B19FEA2959C9F300821362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B19FE92959C9F300821362 /* Assets.xcassets */; };
 		94B19FED2959C9F300821362 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B19FEB2959C9F300821362 /* LaunchScreen.storyboard */; };
 		94B19FF82959C9F300821362 /* DogsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B19FF72959C9F300821362 /* DogsAppTests.swift */; };
@@ -36,11 +36,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9401FDC8295A206A0085C038 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		9401FDCA295A221B0085C038 /* DogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogsViewController.swift; sourceTree = "<group>"; };
 		94B19FDD2959C9F000821362 /* DogsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94B19FE02959C9F000821362 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94B19FE22959C9F000821362 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		94B19FE42959C9F000821362 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		94B19FE72959C9F000821362 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94B19FE92959C9F300821362 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94B19FEC2959C9F300821362 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94B19FEE2959C9F300821362 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +76,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		94832538295A1E5E00AB6609 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9401FDC8295A206A0085C038 /* MainTabBarController.swift */,
+				9401FDCA295A221B0085C038 /* DogsViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		94B19FD42959C9F000821362 = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +108,9 @@
 		94B19FDF2959C9F000821362 /* DogsApp */ = {
 			isa = PBXGroup;
 			children = (
+				94832538295A1E5E00AB6609 /* ViewController */,
 				94B19FE02959C9F000821362 /* AppDelegate.swift */,
 				94B19FE22959C9F000821362 /* SceneDelegate.swift */,
-				94B19FE42959C9F000821362 /* ViewController.swift */,
-				94B19FE62959C9F000821362 /* Main.storyboard */,
 				94B19FE92959C9F300821362 /* Assets.xcassets */,
 				94B19FEB2959C9F300821362 /* LaunchScreen.storyboard */,
 				94B19FEE2959C9F300821362 /* Info.plist */,
@@ -233,7 +241,6 @@
 			files = (
 				94B19FED2959C9F300821362 /* LaunchScreen.storyboard in Resources */,
 				94B19FEA2959C9F300821362 /* Assets.xcassets in Resources */,
-				94B19FE82959C9F000821362 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +265,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94B19FE52959C9F000821362 /* ViewController.swift in Sources */,
+				9401FDC9295A206A0085C038 /* MainTabBarController.swift in Sources */,
+				9401FDCB295A221B0085C038 /* DogsViewController.swift in Sources */,
 				94B19FE12959C9F000821362 /* AppDelegate.swift in Sources */,
 				94B19FE32959C9F000821362 /* SceneDelegate.swift in Sources */,
 			);
@@ -297,14 +305,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		94B19FE62959C9F000821362 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				94B19FE72959C9F000821362 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		94B19FEB2959C9F300821362 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -441,7 +441,6 @@
 				INFOPLIST_FILE = DogsApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -468,7 +467,6 @@
 				INFOPLIST_FILE = DogsApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
