@@ -16,6 +16,7 @@
 		94B19FF82959C9F300821362 /* DogsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B19FF72959C9F300821362 /* DogsAppTests.swift */; };
 		94B1A0022959C9F300821362 /* DogsAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B1A0012959C9F300821362 /* DogsAppUITests.swift */; };
 		94B1A0042959C9F300821362 /* DogsAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B1A0032959C9F300821362 /* DogsAppUITestsLaunchTests.swift */; };
+		94D38F2A295B32E40098AB9A /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D38F29295B32E40098AB9A /* ApiService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		94B19FFD2959C9F300821362 /* DogsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DogsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		94B1A0012959C9F300821362 /* DogsAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogsAppUITests.swift; sourceTree = "<group>"; };
 		94B1A0032959C9F300821362 /* DogsAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogsAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		94D38F29295B32E40098AB9A /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		94B19FDF2959C9F000821362 /* DogsApp */ = {
 			isa = PBXGroup;
 			children = (
+				94D38F28295B32D10098AB9A /* ApiService */,
 				94832538295A1E5E00AB6609 /* ViewController */,
 				94B19FE02959C9F000821362 /* AppDelegate.swift */,
 				94B19FE22959C9F000821362 /* SceneDelegate.swift */,
@@ -133,6 +136,14 @@
 				94B1A0032959C9F300821362 /* DogsAppUITestsLaunchTests.swift */,
 			);
 			path = DogsAppUITests;
+			sourceTree = "<group>";
+		};
+		94D38F28295B32D10098AB9A /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				94D38F29295B32E40098AB9A /* ApiService.swift */,
+			);
+			path = ApiService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +278,7 @@
 			files = (
 				9401FDC9295A206A0085C038 /* MainTabBarController.swift in Sources */,
 				9401FDCB295A221B0085C038 /* DogsViewController.swift in Sources */,
+				94D38F2A295B32E40098AB9A /* ApiService.swift in Sources */,
 				94B19FE12959C9F000821362 /* AppDelegate.swift in Sources */,
 				94B19FE32959C9F000821362 /* SceneDelegate.swift in Sources */,
 			);
