@@ -9,6 +9,10 @@ import UIKit
 
 final class DogsViewController: UIViewController, UICollectionViewDelegate {
     
+    enum Constants {
+        static let cellHeight: CGFloat = 300
+    }
+    
     private typealias DataSource = UICollectionViewDiffableDataSource<Int, Breed>
     private typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Breed>
     
@@ -116,6 +120,6 @@ final class DogsViewController: UIViewController, UICollectionViewDelegate {
 
 extension DogsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: collectionView.frame.width, height: 100)
+        return .init(width: collectionView.frame.width, height: Constants.cellHeight)
     }
 }

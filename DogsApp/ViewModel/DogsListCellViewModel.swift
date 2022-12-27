@@ -30,18 +30,26 @@ final class DogsListCellViewModel: DogsListCellViewModelProtocol {
     
     private static let limitOfItems: Int = 10
     
-    private let apiService: ApiService
+    private let imageDownloader: ImageDownloaderProtocol
     
-    init(apiService: ApiService = ApiService(),
+    init(imageDownloader: ImageDownloaderProtocol = ImageDownloader(),
          image: Image,
          title: String) {
-        self.apiService = apiService
+        self.imageDownloader = imageDownloader
         self.image = image
         self.title = title
     }
     
     func fetchImage() {
-        //TODO: fetch dog image
+        guard let url = URL(string: image.url) else { return }
+        imageDownloader.download(url: url, cacheKey: image.id) { [weak self] result in
+            switch result {
+            case .success(let image):
+                self?.outputEvents.displayImage?(image)
+            case .failure(let error):
+                debugPrint(error)
+            }
+        }
     }
 }
 
