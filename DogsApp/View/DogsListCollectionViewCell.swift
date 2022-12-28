@@ -55,6 +55,8 @@ final class DogsListCollectionViewCell: UICollectionViewCell {
         stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: 10).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
+        titleLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(titleLabel)
     }

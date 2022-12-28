@@ -26,7 +26,7 @@ final class MainTabBarController: UITabBarController {
     }
     
     func configureViewControllers() {
-        let dogsViewController = DogsViewController()
+        let dogsViewController = UINavigationController(rootViewController: DogsViewController())
         viewControllers = [dogsViewController]
     }
 }

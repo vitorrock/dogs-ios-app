@@ -10,7 +10,12 @@ import UIKit
 final class DogsViewController: UIViewController, UICollectionViewDelegate {
     
     enum Constants {
-        static let cellHeight: CGFloat = 300
+        static let listViewCellHeight: CGFloat = 300
+        static let gridViewCellHeight: CGFloat = 150
+        static let collectionViewMargin: CGFloat = 50
+        static let collectionViewSpacing: CGFloat = 50
+        static let listViewTitle: String = "List View"
+        static let gridViewTitle: String = "Grid View"
     }
     
     private typealias DataSource = UICollectionViewDiffableDataSource<Int, Breed>
@@ -18,18 +23,54 @@ final class DogsViewController: UIViewController, UICollectionViewDelegate {
     
     private lazy var dataSource: DataSource = makeDataSource()
     
-    lazy var collectionView: UICollectionView = {
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(
+    private lazy var listCollectionViewLayout: UICollectionViewFlowLayout = {
+        let collectionFlowLayout = UICollectionViewFlowLayout()
+        collectionFlowLayout.itemSize = CGSize(
+            width: UIScreen.main.bounds.width - Constants.collectionViewMargin * 2,
+            height: Constants.listViewCellHeight
+        )
+        collectionFlowLayout.minimumLineSpacing = Constants.collectionViewSpacing
+        collectionFlowLayout.scrollDirection = .vertical
+        return collectionFlowLayout
+    }()
+
+    private lazy var gridCollectionViewLayout: UICollectionViewFlowLayout = {
+        let collectionFlowLayout = UICollectionViewFlowLayout()
+        collectionFlowLayout.itemSize = CGSize(
+            width: (UIScreen.main.bounds.width - Constants.collectionViewMargin) / 2 ,
+            height: Constants.gridViewCellHeight
+        )
+        collectionFlowLayout.minimumInteritemSpacing = Constants.collectionViewSpacing
+        collectionFlowLayout.minimumLineSpacing = Constants.collectionViewSpacing
+        collectionFlowLayout.scrollDirection = .vertical
+        return collectionFlowLayout
+    }()
+    
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: UICollectionViewFlowLayout()
+        )
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(
             DogsListCollectionViewCell.self,
             forCellWithReuseIdentifier: DogsListCollectionViewCell.reuseIdentifier
         )
-        return cv
+        return collectionView
+    }()
+    
+    private lazy var collectionViewBarButton: UIBarButtonItem = {
+        return .init(
+            title: Constants.gridViewTitle,
+            style: .plain,
+            target: self,
+            action: #selector(switchCollectionView)
+        )
     }()
     
     private var viewModel: DogsListViewModelProtocol
     private var activityIndicator = UIActivityIndicatorView(style: .large)
+    private var isListView = true
     
     init(viewModel: DogsListViewModelProtocol = DogsListViewModel()) {
         self.viewModel = viewModel
@@ -54,7 +95,11 @@ final class DogsViewController: UIViewController, UICollectionViewDelegate {
     }
     
     private func setupViews() {
+        navigationItem.rightBarButtonItem = collectionViewBarButton
+        
         collectionView.delegate = self
+        collectionView.collectionViewLayout = listCollectionViewLayout
+        
         view.addSubview(collectionView)
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -116,10 +161,24 @@ final class DogsViewController: UIViewController, UICollectionViewDelegate {
         return cell
     }
     
-}
-
-extension DogsViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: collectionView.frame.width, height: Constants.cellHeight)
+    @objc
+    private func switchCollectionView() {
+        collectionViewBarButton.isEnabled = false
+        isListView = !isListView
+        
+        if isListView {
+            collectionViewBarButton.title = Constants.gridViewTitle
+        } else {
+            collectionViewBarButton.title = Constants.listViewTitle
+        }
+        
+        collectionView.startInteractiveTransition(
+            to: isListView ? listCollectionViewLayout : gridCollectionViewLayout
+        ) { [weak self] completed, _ in
+            if completed {
+                self?.collectionViewBarButton.isEnabled = true
+            }
+        }
+        collectionView.finishInteractiveTransition()
     }
 }

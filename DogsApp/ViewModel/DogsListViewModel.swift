@@ -39,7 +39,6 @@ final class DogsListViewModel: DogsListViewModelProtocol {
     }
     
     func makeCellViewModel(for indexPath: IndexPath) -> DogsListCellViewModel {
-        print("index \(indexPath.row)")
         let breed = currentItems[indexPath.row]
         return .init(
             image: breed.image,
