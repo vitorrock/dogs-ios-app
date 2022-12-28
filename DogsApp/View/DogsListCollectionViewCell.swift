@@ -48,6 +48,11 @@ final class DogsListCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        self.titleLabel.text = ""
+        self.imageView.image = nil
+    }
+    
     private func setupConstraints() {
         addSubview(stackView)
         stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true

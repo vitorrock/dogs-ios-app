@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DogsViewController: UIViewController, UICollectionViewDelegate {
+final class DogsViewController: UIViewController {
     
     enum Constants {
         static let listViewCellHeight: CGFloat = 300
@@ -85,7 +85,7 @@ final class DogsViewController: UIViewController, UICollectionViewDelegate {
         super.viewDidLoad()
         setupViews()
         setupOutputEvents()
-        viewModel.setup()
+        viewModel.fetchDogs()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -101,13 +101,18 @@ final class DogsViewController: UIViewController, UICollectionViewDelegate {
         collectionView.collectionViewLayout = listCollectionViewLayout
         
         view.addSubview(collectionView)
+        view.addSubview(activityIndicator)
+        
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
@@ -180,5 +185,15 @@ final class DogsViewController: UIViewController, UICollectionViewDelegate {
             }
         }
         collectionView.finishInteractiveTransition()
+    }
+}
+
+extension DogsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let lastRowIndex = collectionView.numberOfItems(inSection: 0) - 1
+        
+        if indexPath.row == lastRowIndex {
+            viewModel.fetchDogs()
+        }
     }
 }

@@ -11,7 +11,7 @@ protocol DogsListViewModelProtocol {
     
     var outputEvents: DogsListViewModel.OutputEvents { get set }
     
-    func setup()
+    func fetchDogs()
     func makeCellViewModel(for indexPath: IndexPath) -> DogsListCellViewModel
 }
 
@@ -23,7 +23,7 @@ final class DogsListViewModel: DogsListViewModelProtocol {
     
     var outputEvents: OutputEvents = .init()
     
-    private var currentPage: Int = 0
+    private var currentPage: Int = -1
     private var currentItems: [Breed] = []
     
     private static let limitOfItems: Int = 10
@@ -46,20 +46,22 @@ final class DogsListViewModel: DogsListViewModelProtocol {
         )
     }
     
-    private func fetchDogs() {
+    func fetchDogs() {
         outputEvents.displayLoading?(true)
+        currentPage += 1
         apiService.fetchBreeds(
             with: Self.limitOfItems,
             page: currentPage,
             type: [Breed].self
         ) { [weak self] result in
-            self?.outputEvents.displayLoading?(false)
+            guard let self else { return }
+            self.outputEvents.displayLoading?(false)
             switch result {
             case .failure(_):
                 debugPrint("Error")
             case .success(let breeds):
-                self?.currentItems = breeds
-                self?.outputEvents.displayDogs?(breeds)
+                self.currentItems += breeds
+                self.outputEvents.displayDogs?(self.currentItems)
             }
         }
     }
