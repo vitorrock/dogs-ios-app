@@ -9,13 +9,14 @@ import UIKit
 
 final class DogsViewController: UIViewController {
     
-    enum Constants {
+    private enum Constants {
         static let listViewCellHeight: CGFloat = 300
         static let gridViewCellHeight: CGFloat = 150
         static let collectionViewMargin: CGFloat = 50
         static let collectionViewSpacing: CGFloat = 50
         static let listViewTitle: String = "List View"
         static let gridViewTitle: String = "Grid View"
+        static let title = "Dogs List"
     }
     
     private typealias DataSource = UICollectionViewDiffableDataSource<Int, Breed>
@@ -83,6 +84,7 @@ final class DogsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = Constants.title
         setupViews()
         setupOutputEvents()
         viewModel.fetchDogs()

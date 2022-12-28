@@ -8,7 +8,8 @@
 import Foundation
 
 protocol ApiServiceProtocol {
-    func fetchBreeds<T: Decodable>(with limit: Int, page: Int, type: T.Type, completion:  @escaping (Result<T,Error>) -> Void)
+    func fetchBreeds(with limit: Int, page: Int, completion:  @escaping (Result<[Breed],Error>) -> Void)
+    func fetchAllBreeds(completion:  @escaping (Result<[Breed],Error>) -> Void)
 }
 
 final class ApiService: ApiServiceProtocol {
@@ -19,8 +20,8 @@ final class ApiService: ApiServiceProtocol {
         self.urlSession = urlSession
     }
     
-    func fetchBreeds<T: Decodable>(with limit: Int, page: Int, type: T.Type, completion:  @escaping (Result<T,Error>) -> Void) {
-        let breedsEndpoint = String(format: Endpoints.breeds, limit, page)
+    func fetchBreeds(with limit: Int, page: Int, completion:  @escaping (Result<[Breed],Error>) -> Void) {
+        let breedsEndpoint = String(format: Endpoints.breedsWithPagination, limit, page)
         
         guard let url = URL(string: Endpoints.base + breedsEndpoint) else {
             let error = NSError(domain: "", code: -1, userInfo: nil)
@@ -28,7 +29,17 @@ final class ApiService: ApiServiceProtocol {
             return
         }
         
-        getRequest(url: url, type: type, completion: completion)
+        getRequest(url: url, type: [Breed].self, completion: completion)
+    }
+    
+    func fetchAllBreeds(completion:  @escaping (Result<[Breed],Error>) -> Void) {
+        guard let url = URL(string: Endpoints.base + Endpoints.breeds) else {
+            let error = NSError(domain: "", code: -1, userInfo: nil)
+            completion(.failure(error))
+            return
+        }
+        
+        getRequest(url: url, type: [Breed].self, completion: completion)
     }
     
     private func getRequest<T: Decodable>(url: URL, type: T.Type, completion:  @escaping (Result<T,Error>) -> Void) {

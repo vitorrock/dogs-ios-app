@@ -10,6 +10,11 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     
+    private enum Constants {
+        static let dogsListTitle = "Dogs List"
+        static let serachTitle = "Search"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureAppearance()
@@ -27,6 +32,14 @@ final class MainTabBarController: UITabBarController {
     
     func configureViewControllers() {
         let dogsViewController = UINavigationController(rootViewController: DogsViewController())
-        viewControllers = [dogsViewController]
+        dogsViewController.tabBarItem.title = Constants.dogsListTitle
+        
+        let searchViewController = UINavigationController(rootViewController: SearchViewController())
+        searchViewController.tabBarItem.title = Constants.serachTitle
+        
+        viewControllers = [
+            dogsViewController,
+            searchViewController
+        ]
     }
 }

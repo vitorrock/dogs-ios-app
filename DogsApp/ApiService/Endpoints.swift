@@ -9,5 +9,6 @@ import Foundation
 
 struct Endpoints {
     static let base = "https://api.thedogapi.com/v1"
-    static let breeds = "/breeds?limit=%d&page=%d"
+    static let breeds = "/breeds"
+    static let breedsWithPagination = "/breeds?limit=%d&page=%d"
 }

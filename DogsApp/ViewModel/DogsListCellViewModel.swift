@@ -26,9 +26,6 @@ final class DogsListCellViewModel: DogsListCellViewModelProtocol {
     var title: String
     
     private var image: Image
-    private var currentPage: Int = 0
-    
-    private static let limitOfItems: Int = 10
     
     private let imageDownloader: ImageDownloaderProtocol
     
