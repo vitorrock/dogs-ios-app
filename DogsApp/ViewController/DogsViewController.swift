@@ -198,4 +198,11 @@ extension DogsViewController: UICollectionViewDelegate {
             viewModel.fetchDogs()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailsViewModel = viewModel.makeDetailsViewModel(for: indexPath)
+        let detailsVC = DogDetailsViewController(viewModel: detailsViewModel)
+        
+        present(detailsVC, animated: true)
+    }
 }

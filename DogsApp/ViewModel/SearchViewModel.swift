@@ -15,6 +15,7 @@ protocol SearchViewModelProtocol {
     func numberOfItem() -> Int
     func searchBreed(with searchString: String)
     func makeCellViewModel(for indexPath: IndexPath) -> SearchCellViewModelProtocol
+    func makeDetailsViewModel(for indexPath: IndexPath) -> DogDetailsViewModelProtocol
 }
 
 final class SearchViewModel: SearchViewModelProtocol {
@@ -57,6 +58,17 @@ final class SearchViewModel: SearchViewModelProtocol {
             name: breed.name,
             group: breed.breedGroup?.rawValue,
             origin: breed.origin
+        )
+    }
+    
+    func makeDetailsViewModel(for indexPath: IndexPath) -> DogDetailsViewModelProtocol {
+        let breed = filteredItems[indexPath.row]
+        return DogDetailsViewModel(
+            name: breed.name,
+            group: breed.breedGroup?.rawValue,
+            origin: breed.origin,
+            temperament: breed.temperament,
+            image: breed.image
         )
     }
     

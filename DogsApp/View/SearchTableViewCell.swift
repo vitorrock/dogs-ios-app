@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchTableViewCell: UITableViewCell {
+final class SearchTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "SearchTableViewCell"
     
@@ -17,75 +17,73 @@ class SearchTableViewCell: UITableViewCell {
         static let originTitle: String = "Origin:"
     }
     
+    private let mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private let breedNameTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
         label.font = .boldSystemFont(ofSize: 16)
         label.textAlignment = .left
         label.text = Constants.breedNameTitle
-        label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.numberOfLines = 0
         return label
     }()
     
     private let breedNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
         label.textColor = .darkGray
         label.font = .systemFont(ofSize: 14)
         label.textAlignment = .left
-        label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.setContentHuggingPriority(.required, for: .vertical)
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return label
     }()
     
     private let breedGroupTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
         label.font = .boldSystemFont(ofSize: 16)
         label.textAlignment = .left
         label.text = Constants.breedGroupTitle
-        label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
     
     private let breedGroupLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
         label.textColor = .darkGray
         label.font = .systemFont(ofSize: 14)
         label.textAlignment = .left
-        label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return label
     }()
     
     private let originTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
         label.font = .boldSystemFont(ofSize: 16)
         label.textAlignment = .left
         label.text = Constants.originTitle
-        label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
     
     private let originLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
         label.textColor = .darkGray
         label.font = .systemFont(ofSize: 14)
         label.textAlignment = .left
-        label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return label
     }()
     
@@ -106,35 +104,38 @@ class SearchTableViewCell: UITableViewCell {
     }
     
     private func setupConstraints() {
-        addSubview(breedNameTitleLabel)
-        breedNameTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        breedNameTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 40).isActive = true
+        let stackView = UIStackView()
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(breedNameLabel)
-        breedNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
-        breedNameLabel.leftAnchor.constraint(equalTo: breedNameTitleLabel.rightAnchor, constant: 5).isActive = true
-        breedNameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 5).isActive = true
+        addSubview(stackView)
+        stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -40).isActive = true
+        stackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 40).isActive = true
         
-
-        addSubview(breedGroupTitleLabel)
-        breedGroupTitleLabel.topAnchor.constraint(equalTo: breedNameTitleLabel.bottomAnchor, constant: 5).isActive = true
-        breedGroupTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 40).isActive = true
+        let nameStackView = makeLabelsStackView()
+        nameStackView.addArrangedSubview(breedNameTitleLabel)
+        nameStackView.addArrangedSubview(breedNameLabel)
+        stackView.addArrangedSubview(nameStackView)
         
-        addSubview(breedGroupLabel)
-        breedGroupLabel.topAnchor.constraint(equalTo: breedNameTitleLabel.bottomAnchor, constant: 5).isActive = true
-        breedGroupLabel.leftAnchor.constraint(equalTo: breedGroupTitleLabel.rightAnchor, constant: 5).isActive = true
-        breedGroupLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 5).isActive = true
-
-        addSubview(originTitleLabel)
-        originTitleLabel.topAnchor.constraint(equalTo: breedGroupTitleLabel.bottomAnchor, constant: 5).isActive = true
-        originTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 40).isActive = true
-        bottomAnchor.constraint(equalTo: originTitleLabel.bottomAnchor, constant: 5).isActive = true
+        let groupStackView = makeLabelsStackView()
+        groupStackView.addArrangedSubview(breedGroupTitleLabel)
+        groupStackView.addArrangedSubview(breedGroupLabel)
+        stackView.addArrangedSubview(groupStackView)
         
-        addSubview(originLabel)
-        originLabel.topAnchor.constraint(equalTo: breedGroupTitleLabel.bottomAnchor, constant: 5).isActive = true
-        originLabel.leftAnchor.constraint(equalTo: originTitleLabel.rightAnchor, constant: 5).isActive = true
-        originLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 5).isActive = true
-        bottomAnchor.constraint(greaterThanOrEqualTo: originLabel.bottomAnchor, constant: 10).isActive = true
+        let originStackView = makeLabelsStackView()
+        originStackView.addArrangedSubview(originTitleLabel)
+        originStackView.addArrangedSubview(originLabel)
+        stackView.addArrangedSubview(originStackView)
+    }
+    
+    private func makeLabelsStackView() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.spacing = 5
+        stackView.axis = .horizontal
+        return stackView
     }
     
     func configureCell(viewModel: SearchCellViewModelProtocol) {

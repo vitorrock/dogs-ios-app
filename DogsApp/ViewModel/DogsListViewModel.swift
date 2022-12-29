@@ -13,6 +13,7 @@ protocol DogsListViewModelProtocol {
     
     func fetchDogs()
     func makeCellViewModel(for indexPath: IndexPath) -> DogsListCellViewModelProtocol
+    func makeDetailsViewModel(for indexPath: IndexPath) -> DogDetailsViewModelProtocol
 }
 
 final class DogsListViewModel: DogsListViewModelProtocol {
@@ -39,6 +40,17 @@ final class DogsListViewModel: DogsListViewModelProtocol {
         return DogsListCellViewModel(
             image: breed.image,
             title: breed.name
+        )
+    }
+    
+    func makeDetailsViewModel(for indexPath: IndexPath) -> DogDetailsViewModelProtocol {
+        let breed = currentItems[indexPath.row]
+        return DogDetailsViewModel(
+            name: breed.name,
+            group: breed.breedGroup?.rawValue,
+            origin: breed.origin,
+            temperament: breed.temperament,
+            image: breed.image
         )
     }
     

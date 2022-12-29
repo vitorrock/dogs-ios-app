@@ -110,6 +110,13 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfItem()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailsViewModel = viewModel.makeDetailsViewModel(for: indexPath)
+        let detailsVC = DogDetailsViewController(viewModel: detailsViewModel)
+        
+        present(detailsVC, animated: true)
+    }
 }
 
 extension SearchViewController: UISearchBarDelegate {
