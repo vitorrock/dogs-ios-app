@@ -19,10 +19,6 @@ protocol DogsListViewModelProtocol {
 }
 
 final class DogsListViewModel: DogsListViewModelProtocol {
-    private enum Constants {
-        static let sortNameAlphabetical = "Name A-Z"
-        static let sortNameReverseAlphabetical = "Name Z-A"
-    }
     
     struct OutputEvents {
         var displayDogs: (([Breed]) -> Void)?
@@ -37,22 +33,27 @@ final class DogsListViewModel: DogsListViewModelProtocol {
     private static let limitOfItems: Int = 10
     
     private let apiService: ApiServiceProtocol
+    private let labels: LabelsProtocol
     
-    init(apiService: ApiServiceProtocol = ApiService()) {
+    init(
+        apiService: ApiServiceProtocol = ApiService(),
+        labels: LabelsProtocol = Labels()
+    ) {
         self.apiService = apiService
+        self.labels = labels
     }
     
     func makeMenuActionItems() -> [UIAction] {
         return [
             .init(
-                title: Constants.sortNameAlphabetical,
+                title: labels.getLabel(for: LocalizationKeys.DogsList.sortNameAlphabetical),
                 image: UIImage(systemName: "arrow.down"),
                 handler: { [weak self] action in
                     self?.sortItems(.alphabetical)
                 }
             ),
             .init(
-                title: Constants.sortNameReverseAlphabetical,
+                title: labels.getLabel(for: LocalizationKeys.DogsList.sortNameReverseAlphabetical),
                 image: UIImage(systemName: "arrow.up"),
                 handler: { [weak self] action in
                     self?.sortItems(.reverseAlphabetical)

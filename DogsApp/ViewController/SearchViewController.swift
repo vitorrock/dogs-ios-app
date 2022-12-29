@@ -9,25 +9,16 @@ import UIKit
 
 final class SearchViewController: UIViewController {
     
-    private enum Constants {
-        static let searchPlaceholder = "Search a dog breed"
-        static let title = "Search"
-    }
-    
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = Constants.searchPlaceholder
+        searchController.searchBar.placeholder = labels.getLabel(for: LocalizationKeys.Search.searchBarPlaceholder)
         return searchController
     }()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .singleLine
-        tableView.register(
-            SearchTableViewCell.self,
-            forCellReuseIdentifier: SearchTableViewCell.reuseIdentifier
-        )
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .clear
@@ -41,8 +32,14 @@ final class SearchViewController: UIViewController {
     private var viewModel: SearchViewModelProtocol
     private var activityIndicator = UIActivityIndicatorView(style: .large)
     
-    init(viewModel: SearchViewModelProtocol = SearchViewModel()) {
+    private let labels: LabelsProtocol
+    
+    init(
+        viewModel: SearchViewModelProtocol = SearchViewModel(),
+        labels: LabelsProtocol = Labels()
+    ) {
         self.viewModel = viewModel
+        self.labels = labels
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -64,7 +61,7 @@ final class SearchViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupUI() {
-        title = Constants.title
+        title = labels.getLabel(for: LocalizationKeys.Search.title)
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -109,7 +106,13 @@ final class SearchViewController: UIViewController {
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseIdentifier, for: indexPath) as? SearchTableViewCell else {
+        var cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseIdentifier)
+        
+        if cell == nil {
+            cell = SearchTableViewCell()
+        }
+        
+        guard let cell = cell as? SearchTableViewCell else {
             preconditionFailure("CellWithReuseIdentifier not recognized")
         }
         

@@ -10,9 +10,15 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     
-    private enum Constants {
-        static let dogsListTitle = "Dogs List"
-        static let serachTitle = "Search"
+    private let labels: LabelsProtocol
+    
+    init(labels: LabelsProtocol = Labels()) {
+        self.labels = labels
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -32,10 +38,10 @@ final class MainTabBarController: UITabBarController {
     
     func configureViewControllers() {
         let dogsListViewController = UINavigationController(rootViewController: DogsListViewController())
-        dogsListViewController.tabBarItem.title = Constants.dogsListTitle
+        dogsListViewController.tabBarItem.title = labels.getLabel(for: LocalizationKeys.DogsList.title)
         
         let searchViewController = UINavigationController(rootViewController: SearchViewController())
-        searchViewController.tabBarItem.title = Constants.serachTitle
+        searchViewController.tabBarItem.title = labels.getLabel(for: LocalizationKeys.Search.title)
         
         viewControllers = [
             dogsListViewController,

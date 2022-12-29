@@ -11,12 +11,6 @@ final class SearchTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "SearchTableViewCell"
     
-    private enum Constants {
-        static let breedNameTitle: String = "Name:"
-        static let breedGroupTitle: String = "Group:"
-        static let originTitle: String = "Origin:"
-    }
-    
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 10
@@ -25,12 +19,12 @@ final class SearchTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private let breedNameTitleLabel: UILabel = {
+    private lazy var breedNameTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .boldSystemFont(ofSize: 16)
         label.textAlignment = .left
-        label.text = Constants.breedNameTitle
+        label.text = labels.getLabel(for: LocalizationKeys.Search.breadNameTitle)
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.numberOfLines = 0
         return label
@@ -47,12 +41,12 @@ final class SearchTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let breedGroupTitleLabel: UILabel = {
+    private lazy var breedGroupTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .boldSystemFont(ofSize: 16)
         label.textAlignment = .left
-        label.text = Constants.breedGroupTitle
+        label.text = labels.getLabel(for: LocalizationKeys.Search.breadGroupTitle)
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
@@ -67,12 +61,12 @@ final class SearchTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let originTitleLabel: UILabel = {
+    private lazy var originTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .boldSystemFont(ofSize: 16)
         label.textAlignment = .left
-        label.text = Constants.originTitle
+        label.text = labels.getLabel(for: LocalizationKeys.Search.originTitle)
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
@@ -87,9 +81,11 @@ final class SearchTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let labels: LabelsProtocol
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    init(labels: LabelsProtocol = Labels()) {
+        self.labels = labels
+        super.init(style: .default, reuseIdentifier: Self.reuseIdentifier)
         setupConstraints()
     }
     

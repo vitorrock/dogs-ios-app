@@ -14,7 +14,6 @@ final class DogsListViewController: UIViewController {
         static let gridViewCellHeight: CGFloat = 150
         static let collectionViewMargin: CGFloat = 50
         static let collectionViewSpacing: CGFloat = 50
-        static let title = "Dogs List"
     }
     
     private typealias DataSource = UICollectionViewDiffableDataSource<Int, Breed>
@@ -77,8 +76,14 @@ final class DogsListViewController: UIViewController {
     private var activityIndicator = UIActivityIndicatorView(style: .large)
     private var isListView = true
     
-    init(viewModel: DogsListViewModelProtocol = DogsListViewModel()) {
+    private let labels: LabelsProtocol
+    
+    init(
+        viewModel: DogsListViewModelProtocol = DogsListViewModel(),
+        labels: LabelsProtocol = Labels()
+    ) {
         self.viewModel = viewModel
+        self.labels = labels
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -102,7 +107,7 @@ final class DogsListViewController: UIViewController {
     }
     
     private func setupUI() {
-        title = Constants.title
+        title = labels.getLabel(for: LocalizationKeys.DogsList.title)
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItems = [

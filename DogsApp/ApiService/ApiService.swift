@@ -60,7 +60,6 @@ final class ApiService: ApiServiceProtocol {
             }
             
             do {
-                let str = String(decoding: data, as: UTF8.self)
                 let result = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(result))
             } catch {

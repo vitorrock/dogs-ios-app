@@ -37,6 +37,9 @@
 		94DAA04B295DEDD800370CEB /* ApiServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DAA04A295DEDD800370CEB /* ApiServiceTests.swift */; };
 		94DAA04D295DEE7000370CEB /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DAA04C295DEE7000370CEB /* MockURLProtocol.swift */; };
 		94DAA050295DF90400370CEB /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DAA04F295DF90400370CEB /* TestHelper.swift */; };
+		94DAA053295E540000370CEB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94DAA055295E540000370CEB /* Localizable.strings */; };
+		94DAA058295E56D200370CEB /* LocalizationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DAA057295E56D200370CEB /* LocalizationKeys.swift */; };
+		94DAA05A295E587B00370CEB /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DAA059295E587B00370CEB /* Labels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +93,9 @@
 		94DAA04A295DEDD800370CEB /* ApiServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceTests.swift; sourceTree = "<group>"; };
 		94DAA04C295DEE7000370CEB /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		94DAA04F295DF90400370CEB /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
+		94DAA054295E540000370CEB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		94DAA057295E56D200370CEB /* LocalizationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKeys.swift; sourceTree = "<group>"; };
+		94DAA059295E587B00370CEB /* Labels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +158,7 @@
 		94B19FDF2959C9F000821362 /* DogsApp */ = {
 			isa = PBXGroup;
 			children = (
+				94DAA056295E56BE00370CEB /* Labels */,
 				94CD03D2295BA03000150182 /* ImageDownloader */,
 				94D38F28295B32D10098AB9A /* ApiService */,
 				94D38F1D295B0B140098AB9A /* Models */,
@@ -163,6 +170,7 @@
 				94B19FE92959C9F300821362 /* Assets.xcassets */,
 				94B19FEB2959C9F300821362 /* LaunchScreen.storyboard */,
 				94B19FEE2959C9F300821362 /* Info.plist */,
+				94DAA055295E540000370CEB /* Localizable.strings */,
 			);
 			path = DogsApp;
 			sourceTree = "<group>";
@@ -309,6 +317,15 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		94DAA056295E56BE00370CEB /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				94DAA057295E56D200370CEB /* LocalizationKeys.swift */,
+				94DAA059295E587B00370CEB /* Labels.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -420,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94B19FED2959C9F300821362 /* LaunchScreen.storyboard in Resources */,
+				94DAA053295E540000370CEB /* Localizable.strings in Resources */,
 				94B19FEA2959C9F300821362 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,8 +466,10 @@
 				94D38F1F295B0B220098AB9A /* Breed.swift in Sources */,
 				9401FDC9295A206A0085C038 /* MainTabBarController.swift in Sources */,
 				94554DC1295B44CC00645F55 /* Endpoints.swift in Sources */,
+				94DAA058295E56D200370CEB /* LocalizationKeys.swift in Sources */,
 				94DAA035295DA07F00370CEB /* DogDetailsViewModel.swift in Sources */,
 				9401FDCB295A221B0085C038 /* DogsListViewController.swift in Sources */,
+				94DAA05A295E587B00370CEB /* Labels.swift in Sources */,
 				94D38F24295B18C10098AB9A /* DogsListViewModel.swift in Sources */,
 				94554DC3295B589100645F55 /* DogsListCollectionViewCell.swift in Sources */,
 				94D14C2E295C59F600DC5049 /* SearchViewController.swift in Sources */,
@@ -511,6 +531,14 @@
 				94B19FEC2959C9F300821362 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		94DAA055295E540000370CEB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				94DAA054295E540000370CEB /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

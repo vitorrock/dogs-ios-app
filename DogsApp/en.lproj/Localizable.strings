@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  DogsApp
+
+  Created by Vítor Rocha on 29/12/2022.
+  
+*/
+
+// MARK: - Dogs List
+
+"dogsList.title" = "Dogs List";
+"dogsList.sort.nameAlphabetical" = "Name A-Z";
+"dogsList.sort.NameReverseAlphabetical" = "Name Z-A";
+
+// MARK: - Search
+
+"search.title" = "Search";
+"search.searchBarPlaceholder" = "Search a dog breed";
+"search.breadNameTitle" = "Name:";
+"search.breadGroupTitle" = "Group:";
+"search.originTitle" = "Origin:";
