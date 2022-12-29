@@ -1,5 +1,5 @@
 //
-//  DogsViewController.swift
+//  DogsListViewController.swift
 //  DogsApp
 //
 //  Created by Vítor Rocha on 26/12/2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DogsViewController: UIViewController {
+final class DogsListViewController: UIViewController {
     
     private enum Constants {
         static let listViewCellHeight: CGFloat = 300
@@ -212,7 +212,7 @@ final class DogsViewController: UIViewController {
 
 // MARK: - UICollectionViewDelegate
 
-extension DogsViewController: UICollectionViewDelegate {
+extension DogsListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let lastRowIndex = collectionView.numberOfItems(inSection: 0) - 1
         

@@ -42,17 +42,25 @@ final class ApiService: ApiServiceProtocol {
         getRequest(url: url, type: [Breed].self, completion: completion)
     }
     
-    private func getRequest<T: Decodable>(url: URL, type: T.Type, completion:  @escaping (Result<T,Error>) -> Void) {
+    private func getRequest<T: Decodable>(url: URL, type: T.Type, completion: @escaping (Result<T,Error>) -> Void) {
         
         let task = urlSession.dataTask(with: url) { (data, response, error) in
             
-            guard let data = data, error == nil else {
-                debugPrint(error!)
-                completion(.failure(error!))
+            guard let data = data else {
+                guard let error else {
+                    let error = NSError(domain: "", code: -1, userInfo: nil)
+                    debugPrint(error)
+                    completion(.failure(error))
+                    return
+                }
+                
+                debugPrint(error)
+                completion(.failure(error))
                 return
             }
             
             do {
+                let str = String(decoding: data, as: UTF8.self)
                 let result = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(result))
             } catch {

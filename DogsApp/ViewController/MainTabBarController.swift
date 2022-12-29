@@ -31,14 +31,14 @@ final class MainTabBarController: UITabBarController {
     }
     
     func configureViewControllers() {
-        let dogsViewController = UINavigationController(rootViewController: DogsViewController())
-        dogsViewController.tabBarItem.title = Constants.dogsListTitle
+        let dogsListViewController = UINavigationController(rootViewController: DogsListViewController())
+        dogsListViewController.tabBarItem.title = Constants.dogsListTitle
         
         let searchViewController = UINavigationController(rootViewController: SearchViewController())
         searchViewController.tabBarItem.title = Constants.serachTitle
         
         viewControllers = [
-            dogsViewController,
+            dogsListViewController,
             searchViewController
         ]
     }
