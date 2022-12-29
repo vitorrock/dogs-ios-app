@@ -79,12 +79,16 @@ final class DogDetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupOutputEvents()
         setupUI()
         setupContraints()
     }
+    
+    // MARK: - Private Methods
     
     private func setupUI() {
         view.backgroundColor = .white

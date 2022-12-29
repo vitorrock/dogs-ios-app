@@ -6,17 +6,24 @@
 //
 
 import Foundation
+import UIKit
 
 protocol DogsListViewModelProtocol {
     
     var outputEvents: DogsListViewModel.OutputEvents { get set }
     
     func fetchDogs()
+    func makeMenuActionItems() -> [UIAction]
     func makeCellViewModel(for indexPath: IndexPath) -> DogsListCellViewModelProtocol
     func makeDetailsViewModel(for indexPath: IndexPath) -> DogDetailsViewModelProtocol
 }
 
 final class DogsListViewModel: DogsListViewModelProtocol {
+    private enum Constants {
+        static let sortNameAlphabetical = "Name A-Z"
+        static let sortNameReverseAlphabetical = "Name Z-A"
+    }
+    
     struct OutputEvents {
         var displayDogs: (([Breed]) -> Void)?
         var displayLoading: ((Bool) -> Void)?
@@ -33,6 +40,25 @@ final class DogsListViewModel: DogsListViewModelProtocol {
     
     init(apiService: ApiServiceProtocol = ApiService()) {
         self.apiService = apiService
+    }
+    
+    func makeMenuActionItems() -> [UIAction] {
+        return [
+            .init(
+                title: Constants.sortNameAlphabetical,
+                image: UIImage(systemName: "arrow.down"),
+                handler: { [weak self] action in
+                    self?.sortItems(.alphabetical)
+                }
+            ),
+            .init(
+                title: Constants.sortNameReverseAlphabetical,
+                image: UIImage(systemName: "arrow.up"),
+                handler: { [weak self] action in
+                    self?.sortItems(.reverseAlphabetical)
+                }
+            ),
+        ]
     }
     
     func makeCellViewModel(for indexPath: IndexPath) -> DogsListCellViewModelProtocol {
@@ -71,5 +97,18 @@ final class DogsListViewModel: DogsListViewModelProtocol {
                 self.outputEvents.displayDogs?(self.currentItems)
             }
         }
+    }
+    
+    private func sortItems(_ sortAction: SortAction) {
+        switch sortAction {
+        case .alphabetical:
+            currentItems = currentItems.sorted{ $0.name < $1.name }
+        case .reverseAlphabetical:
+            currentItems = currentItems.sorted{ $0.name > $1.name }
+        default:
+            return
+        }
+        
+        self.outputEvents.displayDogs?(self.currentItems)
     }
 }

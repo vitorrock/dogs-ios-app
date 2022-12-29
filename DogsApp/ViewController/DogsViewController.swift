@@ -14,8 +14,6 @@ final class DogsViewController: UIViewController {
         static let gridViewCellHeight: CGFloat = 150
         static let collectionViewMargin: CGFloat = 50
         static let collectionViewSpacing: CGFloat = 50
-        static let listViewTitle: String = "List View"
-        static let gridViewTitle: String = "Grid View"
         static let title = "Dogs List"
     }
     
@@ -62,10 +60,16 @@ final class DogsViewController: UIViewController {
     
     private lazy var collectionViewBarButton: UIBarButtonItem = {
         return .init(
-            title: Constants.gridViewTitle,
+            image: UIImage(systemName: "square.grid.2x2"),
             style: .plain,
             target: self,
             action: #selector(switchCollectionView)
+        )
+    }()
+    
+    private lazy var sortListBarButton: UIBarButtonItem = {
+        return .init(
+            image: UIImage(systemName: "arrow.up.arrow.down")
         )
     }()
     
@@ -82,10 +86,11 @@ final class DogsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = Constants.title
-        setupViews()
+        setupUI()
         setupOutputEvents()
         viewModel.fetchDogs()
     }
@@ -96,8 +101,14 @@ final class DogsViewController: UIViewController {
         collectionView.layoutIfNeeded()
     }
     
-    private func setupViews() {
-        navigationItem.rightBarButtonItem = collectionViewBarButton
+    private func setupUI() {
+        title = Constants.title
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItems = [
+            collectionViewBarButton,
+            sortListBarButton
+        ]
         
         collectionView.delegate = self
         collectionView.collectionViewLayout = listCollectionViewLayout
@@ -106,6 +117,15 @@ final class DogsViewController: UIViewController {
         view.addSubview(activityIndicator)
         
         setupConstraints()
+        setupSortMenu()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupSortMenu() {
+        let menuItems = viewModel.makeMenuActionItems()
+        let menu: UIMenu = .init(children: menuItems)
+        sortListBarButton.menu = menu
     }
     
     private func setupConstraints() {
@@ -174,9 +194,9 @@ final class DogsViewController: UIViewController {
         isListView = !isListView
         
         if isListView {
-            collectionViewBarButton.title = Constants.gridViewTitle
+            collectionViewBarButton.image = UIImage(systemName: "square.grid.2x2")
         } else {
-            collectionViewBarButton.title = Constants.listViewTitle
+            collectionViewBarButton.image = UIImage(systemName: "line.3.horizontal")
         }
         
         collectionView.startInteractiveTransition(
@@ -189,6 +209,8 @@ final class DogsViewController: UIViewController {
         collectionView.finishInteractiveTransition()
     }
 }
+
+// MARK: - UICollectionViewDelegate
 
 extension DogsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

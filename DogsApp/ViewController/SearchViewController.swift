@@ -50,13 +50,22 @@ final class SearchViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = Constants.title
+        setupUI()
         setupOutputEvents()
         setupNavigationBar()
         setupConstraints()
         viewModel.setup()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupUI() {
+        title = Constants.title
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func setupNavigationBar() {
@@ -96,6 +105,8 @@ final class SearchViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource & UITableViewDelegate
+
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseIdentifier, for: indexPath) as? SearchTableViewCell else {
@@ -118,6 +129,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         present(detailsVC, animated: true)
     }
 }
+
+// MARK: - UISearchBarDelegate
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
